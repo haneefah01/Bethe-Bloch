@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bethee-Bloch Equation</title>
+	<style>
+		input {
+			width: 100px;
+			height: 20px;
+			font-size: 14px;
+			text-align: center;
+			margin: 10px;
+		}
+		button {
+			width: 100px;
+			height: 20px;
+			font-size: 14px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	</style>
+    <script>
+        function betheBloch() {
+            var energy = parseFloat(document.getElementById("energy").value);
+            const q = 1.60217662e-19; // Coulombs
+            const Em = 0.51; // Energy Equilvalent of Electron mass
+            const NZ = 3.88e20; // Mean ionization potential of absorbing atom
+            const I = 8.6e-5; // Mean excitation potential of Absorbing atom
+            const b = 81e36; // Charge of particle (e.g. proton)
+            const a = 2.56e-12; // Atomic mass of iron
+            const beta = Math.sqrt(1 - (Em**2/((Em+energy)**2)));
+            var result =((2*Math.PI * q**4 * NZ * b)/(Em * beta**2 * a))* (Math.log((Em * energy * beta*beta)/((I**2)*(1-(beta**2))))-beta**2)
+            document.getElementById("result").innerHTML = "The energy rate of beta particle is: " + result.toFixed(7) + " J/cm";
+           }
+		
+	</script>
+<body>
+	<h1>Bethee-Bloch Equation</h1>
+</head>
+<img src="bet.png">
+<table>
+    <tr>
+      <th>Parameter</th>
+      <th>Symbol</th>
+      <th>constant value</th>
+    </tr>
+    <tr>
+      <td>Change on the Electron</td>
+      <td>q+</td>
+      <td>1.60217662e-19</td>
+    </tr>
+    <tr>
+      <td>Mean ionization potential of absorbing atom</td>
+      <td>NS</td>
+      <td>3.88e20</td>
+    </tr>
+    <tr>
+      <td>Atomic mass of iron</td>
+      <td>a</td>
+      <td>2.56e-12</td>
+    </tr>
+    <tr>
+        <td>Mean excitation potential of Absorbing atom</td>
+        <td>I</td>
+        <td>8.6e-5</td>
+    </tr>
+    <tr>
+        <td>Charge of particle (e.g. proton)</td>
+        <td>b</td>
+        <td>81e36</td>
+    </tr>
+    <tr>
+        <td>Energy Equilvalent of Electron mass/td>
+        <td>E_m</td>
+        <td>0.51keV</td>
+    </tr>
+    <tr>
+        <td>Kinetic energy of beta particle</td>
+        <td>E_k</td>
+        <td></td>
+    </tr>
+  </table>
+	<form>
+        <label for="energy">Enter the kinetic energy of beta particle (MeV):</label>
+        <input type="number" id="energy" name="energy" required><br>
+        <button type="button" onclick="betheBloch()">Calculate</button>
+      </form>
+      <p id="result"></p>
+</body>
+</html>
